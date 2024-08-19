@@ -1,34 +1,15 @@
 import React from "react";
+import Item from "./Item";
 import style from './Lista.module.scss';
+import { Itarefa } from 'types/Tarefa';
 
-function Lista(){
-    // Adicione os estudos do dia aqui, como:
-    const tarefas = [{
-        tarefa: "React",
-        tempo: "02:00:00"
-    },
-    {
-        tarefa: "Javascript",
-        tempo: "01:30:00"
-    },
-    {
-        tarefa: "TypeScript",
-        tempo: "03:45:00"
-    }]
+function Lista({ tarefas }: { tarefas: Itarefa[] }) {
     return (
         <aside className={style.listaTarefas}>
             <h2>Estudos do dia</h2>
             <ul>
-                {/* Renderiza cada estudo */}
                 {tarefas.map((item, index) => (
-                    <li key={index} className={style.item}>
-                        <h3>
-                            {item.tarefa}
-                        </h3>
-                        <span>
-                            Tempo: {item.tempo}
-                        </span>
-                    </li>
+                    <Item key={index} item={item} index={index} />                
                 ))}
             </ul>
         </aside>
