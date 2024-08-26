@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Botao from '../Botao';
 import style from './Formulario.module.scss';
 import { Itarefa } from 'types/Tarefa';
+import { v4 as uuidv4 } from "uuid"
 
 interface FormularioProps {
   setTarefas: React.Dispatch<React.SetStateAction<Itarefa[]>>;
@@ -13,13 +14,26 @@ function Formulario({ setTarefas }: FormularioProps) {
 
   const adicionarTarefa = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const novaTarefa = { tarefa, tempo };
+    if (!tarefa || !tempo) {
+      alert('Por favor, preencha todos os campos');
+      return;
+    }
+    const novaTarefa = {
+      tarefa,
+      tempo,
+      selecionado: false,
+      completado: false,
+      id: uuidv4(),
+    };
 
     // Agrega la nueva tarea a la lista existente
-    setTarefas((tarefasAnteriores) => [...tarefasAnteriores, novaTarefa]);
+    setTarefas((tarefasAnteriores) => [...tarefasAnteriores, novaTarefa,      
+    ]);
 
     setTarefa('');
     setTempo('00:00:00');
+
+
   }
 
   return (

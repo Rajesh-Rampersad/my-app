@@ -1,20 +1,17 @@
+import { Itarefa } from 'types/Tarefa';
 import style from '../Lista.module.scss';
 
-interface ItemProps{
-    item: {
-        tarefa: string,
-        tempo: string
-    },
-    index: number,
-}
-export default function Item({ item, index }: ItemProps){
+
+export default function Item({ tarefa, tempo, selecionado, completado, id}: Itarefa){
+    console.log();
+    
     return (
-        <li key={index} className={style.item}>
+        <li className={style.item}>
             <h3>
-                {item.tarefa}
+                {tarefa}
             </h3>
             <span>
-                Tempo: {item.tempo}
+                Tempo: {tempo}
             </span>
         </li>
     )
