@@ -10,7 +10,7 @@ interface FormularioProps {
 
 function Formulario({ setTarefas }: FormularioProps) {
   const [tarefa, setTarefa] = useState('');
-  const [tempo, setTempo] = useState('00:00:00');
+  const [tempo, setTempo] = useState<string>('00:00:00');
 
   const adicionarTarefa = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,8 +27,7 @@ function Formulario({ setTarefas }: FormularioProps) {
     };
 
     // Agrega la nueva tarea a la lista existente
-    setTarefas((tarefasAnteriores) => [...tarefasAnteriores, novaTarefa,      
-    ]);
+    setTarefas((tarefasAnteriores) => [...tarefasAnteriores, novaTarefa]);
 
     setTarefa('');
     setTempo('00:00:00');

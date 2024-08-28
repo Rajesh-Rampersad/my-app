@@ -6,13 +6,28 @@ import Cronometro from 'components/Cronometro';
 import { Itarefa } from 'types/Tarefa';
 
 function App() {
-      // Adicione os estudos do dia aqui, como:
-      const [tarefas, setTarefas] = useState<Itarefa[] | []>([])
+  // Inicializa el estado con un array vacío de tareas
+  const [tarefas, setTarefas] = useState<Itarefa[]>([]);
+  const [selecionado, setSelecionado] = useState<Itarefa | undefined>(undefined);
+
+  function selecionaTarefa(tarefaSelecionada: Itarefa) {
+    setSelecionado(tarefaSelecionada);
+
+    setTarefas(tarefasAnteriores => 
+      tarefasAnteriores.map(tarefa => ({
+        ...tarefa,
+        selecionado: tarefa.id === tarefaSelecionada.id, // Marca la tarea seleccionada
+        completado: tarefa.id === tarefaSelecionada.id ? false : tarefa.completado, // Si se selecciona, no está completado
+      }))
+    );
+  }
+
   return (
     <div className={style.AppStyle}>
-      <Formulario setTarefas={setTarefas}/>
-      <Lista tarefas={tarefas} />
-      <Cronometro />
+      <Formulario setTarefas={setTarefas} />
+      <Lista tarefas={tarefas} selecionaTarefa={selecionaTarefa} />
+      {selecionado && <Cronometro selecionado={selecionado} />}
+      
     </div>
   );
 }
